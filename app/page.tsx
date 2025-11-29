@@ -1,66 +1,92 @@
-import Image from "next/image";
 import styles from "./page.module.css";
+import { client, urlForImage } from "@/lib/sanity";
+import { projectsQuery } from "@/lib/sanity.queries";
+import Image from "next/image";
 
-export default function Home() {
+interface Project {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  description: string;
+  link?: string;
+  image?: any;
+  technologies?: string[];
+  featured: boolean;
+  publishedAt: string;
+}
+
+async function getProjects(): Promise<Project[]> {
+  try {
+    const projects = await client.fetch(projectsQuery);
+    return projects || [];
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    return [];
+  }
+}
+
+export default async function Home() {
+  const projects = await getProjects();
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h1 className={styles.title}>Michael Lubembe</h1>
+        <p className={styles.subtitle}>Building tools for the future.</p>
+      </header>
+
+      <main className={styles.grid}>
+        {projects.length === 0 ? (
+          <div className={styles.emptyState}>
+            <p>No projects yet. Add your first project in the Sanity Studio!</p>
+            <a href="/studio" className={styles.studioLink}>
+              Open Studio →
+            </a>
+          </div>
+        ) : (
+          projects.map((project) => {
+            const imageUrl = project.image ? urlForImage(project.image) : null;
+
+            return (
+              <a
+                key={project._id}
+                href={project.link || "#"}
+                className={styles.card}
+                target={project.link ? "_blank" : "_self"}
+                rel="noopener noreferrer"
+              >
+                {imageUrl && (
+                  <div className={styles.cardImage}>
+                    <Image
+                      src={imageUrl}
+                      alt={project.image.alt || project.title}
+                      width={400}
+                      height={250}
+                      className={styles.image}
+                    />
+                  </div>
+                )}
+                <div className={styles.cardContent}>
+                  <h2>
+                    {project.title} &rarr;
+                  </h2>
+                  <p>{project.description}</p>
+                  {project.technologies && project.technologies.length > 0 && (
+                    <div className={styles.technologies}>
+                      {project.technologies.map((tech, idx) => (
+                        <span key={idx} className={styles.tech}>
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </a>
+            );
+          })
+        )}
       </main>
     </div>
   );
 }
+
