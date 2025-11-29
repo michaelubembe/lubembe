@@ -18,6 +18,8 @@
   font-weight: 700;
   margin-bottom: 0.5rem;
   letter-spacing: -0.05em;
+  color: var(--title-color);
+  transition: color 0.3s ease;
 }
 
 .subtitle {
@@ -76,6 +78,14 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
+  color: var(--foreground);
+  transition: color 0.3s ease;
+}
+
+.card h2::after {
+  content: ' →';
+  color: var(--arrow-color);
+  transition: color 0.3s ease;
 }
 
 .card p {

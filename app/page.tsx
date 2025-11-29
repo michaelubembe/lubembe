@@ -2,6 +2,7 @@ import styles from "./page.module.css";
 import { client, urlForImage } from "@/lib/sanity";
 import { projectsQuery } from "@/lib/sanity.queries";
 import Image from "next/image";
+import ThemeToggle from "./components/ThemeToggle";
 
 interface Project {
   _id: string;
@@ -33,6 +34,7 @@ export default async function Home() {
 
   return (
     <div className={styles.container}>
+      <ThemeToggle />
       <header className={styles.header}>
         <h1 className={styles.title}>Michael Lubembe</h1>
         <p className={styles.subtitle}>Building tools for today.</p>
@@ -71,7 +73,7 @@ export default async function Home() {
                 )}
                 <div className={styles.cardContent}>
                   <h2>
-                    {project.title} &rarr;
+                    {project.title}
                   </h2>
                   <p>{project.description}</p>
                   {project.technologies && project.technologies.length > 0 && (
