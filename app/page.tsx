@@ -25,6 +25,9 @@ async function getProjects(): Promise<Project[]> {
   }
 }
 
+// Revalidate every 60 seconds
+export const revalidate = 60;
+
 export default async function Home() {
   const projects = await getProjects();
 
@@ -32,7 +35,7 @@ export default async function Home() {
     <div className={styles.container}>
       <header className={styles.header}>
         <h1 className={styles.title}>Michael Lubembe</h1>
-        <p className={styles.subtitle}>Building tools for the future.</p>
+        <p className={styles.subtitle}>Building tools for today.</p>
       </header>
 
       <main className={styles.grid}>
