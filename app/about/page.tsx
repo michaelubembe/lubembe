@@ -7,7 +7,7 @@ export default function AboutPage() {
         <div className={styles.container}>
             <ThemeToggle />
             <header className={styles.header}>
-                <h1 className={styles.title}>About</h1>
+                <h1 className={styles.title}>About Me</h1>
                 <p className={styles.subtitle}>Software Developer, Digital Electronics Engineer</p>
                 <Navigation />
             </header>
