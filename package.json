@@ -10,13 +10,15 @@
     "sanity": "sanity"
   },
   "dependencies": {
+    "@portabletext/react": "^5.0.0",
     "@sanity/image-url": "^2.0.1",
     "@sanity/vision": "^4.19.0",
     "next": "16.0.5",
     "next-sanity": "^11.6.10",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "sanity": "^4.19.0"
+    "sanity": "^4.19.0",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@types/node": "^20",

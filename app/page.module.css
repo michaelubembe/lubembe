@@ -8,6 +8,8 @@
 }
 
 .header {
+  width: 100%;
+  max-width: 600px;
   margin-bottom: 3rem;
   text-align: center;
   animation: fadeIn 0.8s ease-out;

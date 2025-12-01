@@ -43,3 +43,35 @@ export const projectBySlugQuery = groq`
     publishedAt
   }
 `
+
+// Get all blog posts, ordered by published date
+export const blogsQuery = groq`
+  *[_type == "blog"] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    excerpt,
+    publishedAt,
+    author,
+    readingTime,
+    tags,
+    featured
+  }
+`
+
+// Get a single blog post by slug with full content
+export const blogBySlugQuery = groq`
+  *[_type == "blog" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    excerpt,
+    content,
+    publishedAt,
+    author,
+    readingTime,
+    tags,
+    featured
+  }
+`
+

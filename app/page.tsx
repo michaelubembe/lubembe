@@ -3,6 +3,7 @@ import { client, urlForImage } from "@/lib/sanity";
 import { projectsQuery } from "@/lib/sanity.queries";
 import Image from "next/image";
 import ThemeToggle from "./components/ThemeToggle";
+import Navigation from "./components/Navigation";
 import { formatRelativeTime } from "./utils/formatDate";
 
 interface Project {
@@ -39,6 +40,7 @@ export default async function Home() {
       <header className={styles.header}>
         <h1 className={styles.title}>Michael Lubembe</h1>
         <p className={styles.subtitle}>Building tools for today.</p>
+        <Navigation />
       </header>
 
       <main className={styles.grid}>

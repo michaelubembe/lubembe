@@ -12,6 +12,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+import StyledComponentsRegistry from "@/lib/registry";
+
 export const metadata: Metadata = {
   title: "Michael Lubembe | Projects",
   description: "Portfolio and projects of Michael Lubembe.",
@@ -25,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>
   );
