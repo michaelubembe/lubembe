@@ -8,6 +8,7 @@ export default function AboutPage() {
             <ThemeToggle />
             <header className={styles.header}>
                 <h1 className={styles.title}>About</h1>
+                <p className={styles.subtitle}>Software Developer, Digital Electronics Engineer</p>
                 <Navigation />
             </header>
 
