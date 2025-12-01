@@ -3,6 +3,7 @@ import { client, urlForImage } from "@/lib/sanity";
 import { projectsQuery } from "@/lib/sanity.queries";
 import Image from "next/image";
 import ThemeToggle from "./components/ThemeToggle";
+import { formatRelativeTime } from "./utils/formatDate";
 
 interface Project {
   _id: string;
@@ -72,9 +73,14 @@ export default async function Home() {
                   </div>
                 )}
                 <div className={styles.cardContent}>
-                  <h2>
-                    {project.title}
-                  </h2>
+                  <div className={styles.cardHeader}>
+                    <h2>
+                      {project.title}
+                    </h2>
+                    <span className={styles.date}>
+                      {formatRelativeTime(project.publishedAt)}
+                    </span>
+                  </div>
                   <p>{project.description}</p>
                   {project.technologies && project.technologies.length > 0 && (
                     <div className={styles.technologies}>

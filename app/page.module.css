@@ -74,18 +74,34 @@
   gap: 0.5rem;
 }
 
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
 .card h2 {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
   color: var(--foreground);
   transition: color 0.3s ease;
+  flex: 1;
 }
 
 .card h2::after {
   content: ' →';
   color: var(--arrow-color);
   transition: color 0.3s ease;
+}
+
+.date {
+  font-size: 0.8rem;
+  color: #999;
+  white-space: nowrap;
+  font-weight: 400;
 }
 
 .card p {
